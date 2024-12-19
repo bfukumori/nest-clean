@@ -10,13 +10,13 @@ import { Slug } from "./value-objects/slug";
 
 export interface QuestionProps {
   authorId: UniqueEntityID;
-  bestAnswerId?: UniqueEntityID;
+  bestAnswerId?: UniqueEntityID | null;
   title: string;
   content: string;
   slug: Slug;
   attachments?: QuestionAttachmentList;
   createdAt: Date;
-  updatedAt?: Date;
+  updatedAt?: Date | null;
 }
 export class Question extends AggregateRoot<QuestionProps> {
   get content(): string {
@@ -46,7 +46,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this._props.authorId;
   }
 
-  get bestAnswerId(): UniqueEntityID | undefined {
+  get bestAnswerId(): UniqueEntityID | undefined | null {
     return this._props.bestAnswerId;
   }
 
@@ -76,7 +76,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this._props.createdAt;
   }
 
-  get updatedAt(): Date | undefined {
+  get updatedAt(): Date | undefined | null {
     return this._props.updatedAt;
   }
 

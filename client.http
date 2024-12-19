@@ -30,7 +30,7 @@ Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-    "title": "How to fetch questions?",
+    "title": "How to fetch questions 2?",
     "content": "I'm having troubles fetching questions. Can someone help me?"
 }
 

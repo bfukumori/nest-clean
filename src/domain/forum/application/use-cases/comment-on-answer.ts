@@ -21,8 +21,8 @@ type CommentOnAnswerUseCaseResponse = Either<
 
 export class CommentOnAnswerUseCase {
   constructor(
-    private readonly answersRepository: AnswersRepository,
-    private readonly answerCommentsRepository: AnswerCommentsRepository,
+    protected readonly answersRepository: AnswersRepository,
+    protected readonly answerCommentsRepository: AnswerCommentsRepository,
   ) {}
 
   async execute({

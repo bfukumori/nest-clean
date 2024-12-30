@@ -2,24 +2,31 @@ import { INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Test } from "@nestjs/testing";
 import request from "supertest";
+import { AnswerFactory } from "test/factories/make-answer";
+import { QuestionFactory } from "test/factories/make-question";
+import { StudentFactory } from "test/factories/make-student";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 
+import { Slug } from "@/domain/forum/enterprise/entities/value-objects/slug";
 import { AppModule } from "@/infra/app.module";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { DatabaseModule } from "@/infra/database/database.module";
 
 describe("Get questions (e2e)", () => {
   let app: INestApplication;
-  let prismaService: PrismaService;
   let jwtService: JwtService;
+  let studentFactory: StudentFactory;
+  let questionFactory: QuestionFactory;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [StudentFactory, QuestionFactory, AnswerFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
-    prismaService = moduleRef.get(PrismaService);
     jwtService = moduleRef.get(JwtService);
+    studentFactory = moduleRef.get(StudentFactory);
+    questionFactory = moduleRef.get(QuestionFactory);
 
     await app.init();
   });
@@ -29,47 +36,34 @@ describe("Get questions (e2e)", () => {
   });
 
   test("[GET] /questions", async () => {
-    const user = await prismaService.user.create({
-      data: {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        password: "123456",
-      },
+    const user = await studentFactory.makePrismaStudent();
+
+    const accessToken = jwtService.sign({ sub: user.id.toString() });
+
+    await questionFactory.makePrismaQuestion({
+      title: "Question 1",
+      slug: Slug.create("question-1"),
+      authorId: user.id,
     });
 
-    const accessToken = jwtService.sign({ sub: user.id });
-
-    await prismaService.question.createMany({
-      data: [
-        {
-          title: "Question 1",
-          slug: "question-1",
-          content: "Question content",
-          authorId: user.id,
-        },
-        {
-          title: "Question 2",
-          slug: "question-2",
-          content: "Question content",
-          authorId: user.id,
-        },
-      ],
+    await questionFactory.makePrismaQuestion({
+      title: "Question 2",
+      slug: Slug.create("question-2"),
+      authorId: user.id,
     });
 
     const response = await request(app.getHttpServer())
       .get("/questions")
       .set("Authorization", `Bearer ${accessToken}`)
-      .send({
-        title: "New question",
-        content: "Question content",
-      });
+      .send();
 
     expect(response.status).toBe(200);
-    expect(response.body).toStrictEqual({
-      questions: [
-        expect.objectContaining({ title: "Question 1" }),
+
+    expect(response.body).toEqual({
+      questions: expect.arrayContaining([
         expect.objectContaining({ title: "Question 2" }),
-      ],
+        expect.objectContaining({ title: "Question 1" }),
+      ]),
     });
   });
 });

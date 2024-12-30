@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 
-import { CryptographyModule } from "@/infra/crytography/cryptography.module";
+import { CryptographyModule } from "@/infra/cryptography/cryptography.module";
 import { DatabaseModule } from "@/infra/database/database.module";
 
 import { RegisterStudentService } from "../auth/services/register-student.service";

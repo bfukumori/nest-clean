@@ -17,7 +17,7 @@ type FetchAnswerCommentsUseCaseResponse = Either<
 
 export class FetchAnswerCommentsUseCase {
   constructor(
-    private readonly answerCommentsRepository: AnswerCommentsRepository,
+    protected readonly answerCommentsRepository: AnswerCommentsRepository,
   ) {}
 
   async execute({

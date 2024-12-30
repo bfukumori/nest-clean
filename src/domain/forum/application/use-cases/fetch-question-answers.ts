@@ -16,7 +16,7 @@ type FetchQuestionAnswersUseCaseResponse = Either<
 >;
 
 export class FetchQuestionAnswersUseCase {
-  constructor(private readonly answersRepository: AnswersRepository) {}
+  constructor(protected readonly answersRepository: AnswersRepository) {}
 
   async execute({
     page,

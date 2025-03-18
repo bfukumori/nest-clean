@@ -15,6 +15,7 @@ import { CreateAnswerService } from "../../answer/services/create-answer.service
 
 const createAnswerBodySchema = z.object({
   content: z.string(),
+  attachments: z.array(z.string().uuid()),
 });
 
 type CreateAnswerBody = z.infer<typeof createAnswerBodySchema>;
@@ -29,13 +30,13 @@ export class CreateAnswerController {
     @CurrentUser() user: UserPayload,
     @Param("questionId") questionId: string,
   ) {
-    const { content } = body;
+    const { content, attachments } = body;
 
     const result = await this.createAnswer.execute({
       content,
       authorId: user.sub,
       questionId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
     });
 
     if (result.isLeft()) {

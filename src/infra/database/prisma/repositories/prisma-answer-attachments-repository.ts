@@ -12,17 +12,43 @@ export class PrismaAnswerAttachmentsRepository
 {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findManyByAnswerId(questionId: string): Promise<AnswerAttachment[]> {
-    const questionAttachments = await this.prisma.attachment.findMany({
-      where: { questionId },
+  async findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {
+    const answerAttachments = await this.prisma.attachment.findMany({
+      where: { answerId },
     });
 
-    return questionAttachments.map(PrismaAnswerAttachmentMapper.toDomain);
+    return answerAttachments.map(PrismaAnswerAttachmentMapper.toDomain);
   }
 
-  async deleteManyByAnswerId(questionId: string): Promise<void> {
+  async deleteManyByAnswerId(answerId: string): Promise<void> {
     await this.prisma.attachment.deleteMany({
-      where: { questionId },
+      where: { answerId },
+    });
+  }
+
+  async createMany(attachments: AnswerAttachment[]): Promise<void> {
+    if (attachments.length === 0) {
+      return;
+    }
+
+    const data = PrismaAnswerAttachmentMapper.toPrismaUpdateMany(attachments);
+
+    await this.prisma.attachment.updateMany(data);
+  }
+
+  async deleteMany(attachments: AnswerAttachment[]): Promise<void> {
+    if (attachments.length === 0) {
+      return;
+    }
+
+    const ids = attachments.map((attachment) => attachment.id.toString());
+
+    await this.prisma.attachment.deleteMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
     });
   }
 }

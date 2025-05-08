@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   AnswerAttachment,
-  type AnswerAttachmentProps,
+  AnswerAttachmentProps,
 } from "@/domain/forum/enterprise/entities/answer-attachment";
 import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 

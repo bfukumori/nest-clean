@@ -1,5 +1,5 @@
-import { type NotificationsRepository } from "@/domain/notification/application/repositories/notifications-repository";
-import { type Notification } from "@/domain/notification/enterprise/entities/notification";
+import { NotificationsRepository } from "@/domain/notification/application/repositories/notifications-repository";
+import { Notification } from "@/domain/notification/enterprise/entities/notification";
 
 export class InMemoryNotificationsRepository
   implements NotificationsRepository
@@ -9,7 +9,7 @@ export class InMemoryNotificationsRepository
   async findById(id: string): Promise<Notification | null> {
     const notification = this.items.find((item) => item.id.toString() === id);
 
-    if (notification === null || notification === undefined) {
+    if (!notification) {
       return null;
     }
 

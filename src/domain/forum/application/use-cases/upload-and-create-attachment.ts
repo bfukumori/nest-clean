@@ -1,4 +1,4 @@
-import { type Either, left, right } from "@/core/either";
+import { Either, left, right } from "@/core/either";
 
 import { Attachment } from "../../enterprise/entities/attachment";
 import { AttachmentsRepository } from "../repositories/attachments-repository";

@@ -1,4 +1,4 @@
-import { type Notification } from "@/domain/notification/enterprise/entities/notification";
+import { Notification } from "@/domain/notification/enterprise/entities/notification";
 
 export abstract class NotificationsRepository {
   abstract create: (notification: Notification) => Promise<void>;

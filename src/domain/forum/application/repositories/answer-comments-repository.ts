@@ -1,5 +1,5 @@
-import { type PaginationParams } from "@/core/repositories/pagination-params";
-import { type AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment";
+import { PaginationParams } from "@/core/repositories/pagination-params";
+import { AnswerComment } from "@/domain/forum/enterprise/entities/answer-comment";
 
 import { CommentWithAuthor } from "../../enterprise/entities/value-objects/comment-with-author";
 

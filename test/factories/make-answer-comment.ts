@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   AnswerComment,
-  type AnswerCommentProps,
+  AnswerCommentProps,
 } from "@/domain/forum/enterprise/entities/answer-comment";
 import { PrismaAnswerCommentMapper } from "@/infra/modules/database/prisma/mappers/prisma-answer-comment-mapper";
 import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";

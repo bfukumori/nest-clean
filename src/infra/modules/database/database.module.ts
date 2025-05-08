@@ -54,6 +54,10 @@ import { PrismaStudentsRepository } from "./prisma/repositories/prisma-students-
       provide: AttachmentsRepository,
       useClass: PrismaAttachmentsRepository,
     },
+    {
+      provide: NotificationsRepository,
+      useClass: PrismaNotificationsRepository,
+    },
   ],
   exports: [
     PrismaService,

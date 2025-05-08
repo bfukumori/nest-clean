@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { AggregateRoot } from "@/core/entities/aggregate-root";
-import { type UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
-import { type DomainEvent } from "./domain-event";
+import { DomainEvent } from "./domain-event";
 import { DomainEvents } from "./domain-events";
 
 class CustomAggregateCreated implements DomainEvent {

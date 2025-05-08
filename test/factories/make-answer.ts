@@ -2,10 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import {
-  Answer,
-  type AnswerProps,
-} from "@/domain/forum/enterprise/entities/answer";
+import { Answer, AnswerProps } from "@/domain/forum/enterprise/entities/answer";
 import { PrismaAnswerMapper } from "@/infra/modules/database/prisma/mappers/prisma-answer-mapper";
 import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 

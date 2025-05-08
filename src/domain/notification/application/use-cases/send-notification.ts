@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 
-import { type Either, right } from "@/core/either";
+import { Either, right } from "@/core/either";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Notification } from "@/domain/notification/enterprise/entities/notification";
 

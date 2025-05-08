@@ -1,4 +1,4 @@
-import { type Either, right } from "@/core/either";
+import { Either, right } from "@/core/either";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Question } from "@/domain/forum/enterprise/entities/question";
 import { QuestionAttachment } from "@/domain/forum/enterprise/entities/question-attachment";

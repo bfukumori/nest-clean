@@ -1,7 +1,7 @@
-import { type Either, right } from "@/core/either";
+import { Either, right } from "@/core/either";
 
 import { CommentWithAuthor } from "../../enterprise/entities/value-objects/comment-with-author";
-import { type QuestionCommentsRepository } from "../repositories/question-comments-repository";
+import { QuestionCommentsRepository } from "../repositories/question-comments-repository";
 
 interface FetchQuestionCommentsUseCaseRequest {
   page: number;

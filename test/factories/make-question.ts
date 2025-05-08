@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import {
   Question,
-  type QuestionProps,
+  QuestionProps,
 } from "@/domain/forum/enterprise/entities/question";
 import { Slug } from "@/domain/forum/enterprise/entities/value-objects/slug";
 import { PrismaQuestionMapper } from "@/infra/modules/database/prisma/mappers/prisma-question-mapper";

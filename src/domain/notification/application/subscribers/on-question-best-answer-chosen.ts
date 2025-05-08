@@ -36,7 +36,7 @@ export class OnQuestionBestAnswerChosen implements EventHandler {
 
     if (answer !== null) {
       await this.sendNotificationUseCase.execute({
-        recipientId: answer?.authorId.toString(),
+        recipientId: answer.authorId.toString(),
         title: "Sua resposta foi escolhida",
         content: `A resposta que você enviou em "${question.title
           .substring(0, 20)

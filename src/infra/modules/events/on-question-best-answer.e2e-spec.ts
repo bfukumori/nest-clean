@@ -64,7 +64,7 @@ describe("On question best answer chosen (e2e)", () => {
       .set("Authorization", `Bearer ${accessToken}`)
       .send();
 
-    await waitFor(async () => {
+    waitFor(async () => {
       const notificationOnDatabase = await prismaService.notification.findFirst(
         {
           where: {

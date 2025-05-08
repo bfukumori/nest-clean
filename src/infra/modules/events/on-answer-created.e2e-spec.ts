@@ -41,7 +41,7 @@ describe("On answer created (E2E)", () => {
     await app.close();
   });
 
-  it.skip("should send a notification when answer is created", async () => {
+  it("should send a notification when answer is created", async () => {
     const user = await studentFactory.makePrismaStudent();
 
     const accessToken = jwtService.sign({ sub: user.id.toString() });
@@ -57,7 +57,7 @@ describe("On answer created (E2E)", () => {
       .set("Authorization", `Bearer ${accessToken}`)
       .send();
 
-    await waitFor(async () => {
+    waitFor(async () => {
       const notificationOnDatabase = await prismaService.notification.findFirst(
         {
           where: {

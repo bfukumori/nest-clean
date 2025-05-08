@@ -2,8 +2,8 @@ import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 
-import { CryptographyModule } from "@/infra/cryptography/cryptography.module";
-import { DatabaseModule } from "@/infra/database/database.module";
+import { CryptographyModule } from "@/infra/modules/cryptography/cryptography.module";
+import { DatabaseModule } from "@/infra/modules/database/database.module";
 import { EnvService } from "@/infra/modules/env/env.service";
 
 import { EnvModule } from "../env/env.module";

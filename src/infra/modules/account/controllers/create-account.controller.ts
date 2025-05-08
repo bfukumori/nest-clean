@@ -9,7 +9,7 @@ import {
 import { z } from "zod";
 
 import { StudentAlreadyExistsError } from "@/domain/forum/application/use-cases/errors/student-already-exists-error";
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation.pipe";
+import { ZodValidationPipe } from "@/infra/modules/http/pipes/zod-validation.pipe";
 
 import { Public } from "../../auth/public";
 import { RegisterStudentService } from "../../auth/services/register-student.service";

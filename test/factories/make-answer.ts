@@ -6,8 +6,8 @@ import {
   Answer,
   type AnswerProps,
 } from "@/domain/forum/enterprise/entities/answer";
-import { PrismaAnswerMapper } from "@/infra/database/prisma/mappers/prisma-answer-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaAnswerMapper } from "@/infra/modules/database/prisma/mappers/prisma-answer-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeAnswer(
   override?: Partial<AnswerProps>,

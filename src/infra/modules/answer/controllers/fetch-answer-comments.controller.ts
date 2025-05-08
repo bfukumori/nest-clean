@@ -7,8 +7,8 @@ import {
 } from "@nestjs/common";
 import { z } from "zod";
 
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation.pipe";
-import { CommentWithAuthorPresenter } from "@/infra/http/presenters/comment-with-author-presenter";
+import { ZodValidationPipe } from "@/infra/modules/http/pipes/zod-validation.pipe";
+import { CommentWithAuthorPresenter } from "@/infra/modules/http/presenters/comment-with-author-presenter";
 
 import { FetchAnswerCommentsService } from "../services/fetch-answer-comments.service";
 

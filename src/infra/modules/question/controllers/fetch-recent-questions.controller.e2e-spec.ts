@@ -9,7 +9,7 @@ import { afterAll, beforeAll, describe, expect, test } from "vitest";
 
 import { Slug } from "@/domain/forum/enterprise/entities/value-objects/slug";
 import { AppModule } from "@/infra/app.module";
-import { DatabaseModule } from "@/infra/database/database.module";
+import { DatabaseModule } from "@/infra/modules/database/database.module";
 
 describe("Get questions (e2e)", () => {
   let app: INestApplication;

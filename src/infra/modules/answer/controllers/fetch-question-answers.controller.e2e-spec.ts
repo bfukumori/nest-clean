@@ -8,7 +8,7 @@ import { StudentFactory } from "test/factories/make-student";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 
 import { AppModule } from "@/infra/app.module";
-import { DatabaseModule } from "@/infra/database/database.module";
+import { DatabaseModule } from "@/infra/modules/database/database.module";
 
 describe("Get question answers (e2e)", () => {
   let app: INestApplication;

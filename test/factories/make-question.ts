@@ -7,8 +7,8 @@ import {
   type QuestionProps,
 } from "@/domain/forum/enterprise/entities/question";
 import { Slug } from "@/domain/forum/enterprise/entities/value-objects/slug";
-import { PrismaQuestionMapper } from "@/infra/database/prisma/mappers/prisma-question-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaQuestionMapper } from "@/infra/modules/database/prisma/mappers/prisma-question-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeQuestion(
   override?: Partial<QuestionProps>,

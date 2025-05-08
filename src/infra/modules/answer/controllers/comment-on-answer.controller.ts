@@ -7,7 +7,7 @@ import {
 } from "@nestjs/common";
 import { z } from "zod";
 
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation.pipe";
+import { ZodValidationPipe } from "@/infra/modules/http/pipes/zod-validation.pipe";
 import { CurrentUser } from "@/infra/modules/auth/current-user.decorator";
 import { UserPayload } from "@/infra/modules/auth/jwt-strategy";
 

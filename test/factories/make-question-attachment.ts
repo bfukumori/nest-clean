@@ -5,7 +5,7 @@ import {
   QuestionAttachment,
   type QuestionAttachmentProps,
 } from "@/domain/forum/enterprise/entities/question-attachment";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeQuestionAttachment(
   override?: Partial<QuestionAttachmentProps>,

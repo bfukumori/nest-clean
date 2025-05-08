@@ -6,8 +6,8 @@ import {
   Attachment,
   AttachmentProps,
 } from "@/domain/forum/enterprise/entities/attachment";
-import { PrismaAttachmentMapper } from "@/infra/database/prisma/mappers/prisma-attachment-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaAttachmentMapper } from "@/infra/modules/database/prisma/mappers/prisma-attachment-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeAttachment(
   override?: Partial<AttachmentProps>,

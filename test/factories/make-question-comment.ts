@@ -6,8 +6,8 @@ import {
   QuestionComment,
   type QuestionCommentProps,
 } from "@/domain/forum/enterprise/entities/question-comment";
-import { PrismaQuestionCommentMapper } from "@/infra/database/prisma/mappers/prisma-question-comment-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaQuestionCommentMapper } from "@/infra/modules/database/prisma/mappers/prisma-question-comment-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeQuestionComment(
   override?: Partial<QuestionCommentProps>,

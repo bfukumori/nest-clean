@@ -6,8 +6,8 @@ import {
   Student,
   StudentProps,
 } from "@/domain/forum/enterprise/entities/student";
-import { PrismaStudentMapper } from "@/infra/database/prisma/mappers/prisma-student-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaStudentMapper } from "@/infra/modules/database/prisma/mappers/prisma-student-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeStudent(
   override?: Partial<StudentProps>,

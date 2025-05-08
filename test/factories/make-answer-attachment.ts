@@ -5,7 +5,7 @@ import {
   AnswerAttachment,
   type AnswerAttachmentProps,
 } from "@/domain/forum/enterprise/entities/answer-attachment";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeAnswerAttachment(
   override?: Partial<AnswerAttachmentProps>,

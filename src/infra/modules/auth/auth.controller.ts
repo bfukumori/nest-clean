@@ -9,7 +9,7 @@ import {
 import { z } from "zod";
 
 import { WrongCredentialsError } from "@/domain/forum/application/use-cases/errors/wrong-credentials-error";
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation.pipe";
+import { ZodValidationPipe } from "@/infra/modules/http/pipes/zod-validation.pipe";
 
 import { Public } from "./public";
 import { AuthenticateStudentService } from "./services/authenticate-student.service";

@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 
-import { HttpModule } from "./http/http.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { envSchema } from "./modules/env/env";
 import { EnvModule } from "./modules/env/env.module";
+import { HttpModule } from "./modules/http/http.module";
 
 @Module({
   imports: [

@@ -6,8 +6,8 @@ import {
   AnswerComment,
   type AnswerCommentProps,
 } from "@/domain/forum/enterprise/entities/answer-comment";
-import { PrismaAnswerCommentMapper } from "@/infra/database/prisma/mappers/prisma-answer-comment-mapper";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { PrismaAnswerCommentMapper } from "@/infra/modules/database/prisma/mappers/prisma-answer-comment-mapper";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 export function makeAnswerComment(
   override?: Partial<AnswerCommentProps>,

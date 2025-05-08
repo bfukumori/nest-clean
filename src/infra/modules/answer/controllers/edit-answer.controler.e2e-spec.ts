@@ -10,8 +10,8 @@ import { StudentFactory } from "test/factories/make-student";
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
 
 import { AppModule } from "@/infra/app.module";
-import { DatabaseModule } from "@/infra/database/database.module";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { DatabaseModule } from "@/infra/modules/database/database.module";
+import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
 describe("Edit answer (e2e)", () => {
   let app: INestApplication;

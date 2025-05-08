@@ -8,7 +8,7 @@ import {
   UploadParams,
 } from "@/domain/forum/application/storage/uploader";
 
-import { EnvService } from "../modules/env/env.service";
+import { EnvService } from "../env/env.service";
 
 @Injectable()
 export class R2Storage implements Uploader {

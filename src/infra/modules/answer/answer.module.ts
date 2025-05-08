@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 
-import { DatabaseModule } from "@/infra/database/database.module";
+import { DatabaseModule } from "@/infra/modules/database/database.module";
 
 import { ChooseQuestionBestAnswerController } from "./controllers/choose-question-best-answer.controller";
 import { CommentOnAnswerController } from "./controllers/comment-on-answer.controller";

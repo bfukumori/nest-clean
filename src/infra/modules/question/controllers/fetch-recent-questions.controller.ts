@@ -1,8 +1,8 @@
 import { BadRequestException, Controller, Get, Query } from "@nestjs/common";
 import { z } from "zod";
 
-import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation.pipe";
-import { QuestionPresenter } from "@/infra/http/presenters/question-presenter";
+import { ZodValidationPipe } from "@/infra/modules/http/pipes/zod-validation.pipe";
+import { QuestionPresenter } from "@/infra/modules/http/presenters/question-presenter";
 
 import { FetchRecentQuestionsService } from "../services/fetch-recent-questions.service";
 

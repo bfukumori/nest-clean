@@ -1,6 +1,6 @@
 import { BadRequestException, Controller, Get, Param } from "@nestjs/common";
 
-import { QuestionDetailsPresenter } from "@/infra/http/presenters/question-details-presenter";
+import { QuestionDetailsPresenter } from "@/infra/modules/http/presenters/question-details-presenter";
 
 import { GetQuestionBySlugService } from "../services/get-question-by-slug.service";
 

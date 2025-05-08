@@ -2,37 +2,34 @@ import { INestApplication } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Test } from "@nestjs/testing";
 import request from "supertest";
+import { NotificationFactory } from "test/factories/make-notification";
 import { QuestionFactory } from "test/factories/make-question";
 import { StudentFactory } from "test/factories/make-student";
-import { waitFor } from "test/utils/waitFor";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, test } from "vitest";
 
-import { DomainEvents } from "@/core/events/domain-events";
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/modules/database/database.module";
-import { PrismaService } from "@/infra/modules/database/prisma/prisma.service";
 
-describe("On answer created (E2E)", () => {
+import { PrismaService } from "../../database/prisma/prisma.service";
+
+describe("Read notification (e2e)", () => {
   let app: INestApplication;
   let jwtService: JwtService;
   let prismaService: PrismaService;
   let studentFactory: StudentFactory;
-  let questionFactory: QuestionFactory;
+  let notificationFactory: NotificationFactory;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory],
+      providers: [StudentFactory, QuestionFactory, NotificationFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
-
     jwtService = moduleRef.get(JwtService);
     prismaService = moduleRef.get(PrismaService);
     studentFactory = moduleRef.get(StudentFactory);
-    questionFactory = moduleRef.get(QuestionFactory);
-
-    DomainEvents.shouldRun = true;
+    notificationFactory = moduleRef.get(NotificationFactory);
 
     await app.init();
   });
@@ -41,32 +38,30 @@ describe("On answer created (E2E)", () => {
     await app.close();
   });
 
-  it.skip("should send a notification when answer is created", async () => {
-    const user = await studentFactory.makePrismaStudent();
+  test("[PATCH] /notifications/:notificationId/read", async () => {
+    const user = await studentFactory.makePrismaStudent({ name: "John Doe" });
 
     const accessToken = jwtService.sign({ sub: user.id.toString() });
 
-    const question = await questionFactory.makePrismaQuestion({
-      authorId: user.id,
+    const notification = await notificationFactory.makePrismaNotification({
+      recipientId: user.id,
     });
 
-    const questionId = question.id.toString();
+    const notificationId = notification.id.toString();
 
-    await request(app.getHttpServer())
-      .post(`/questions/${questionId}/answers`)
+    const response = await request(app.getHttpServer())
+      .patch(`/notifications/${notificationId}/read`)
       .set("Authorization", `Bearer ${accessToken}`)
       .send();
 
-    await waitFor(async () => {
-      const notificationOnDatabase = await prismaService.notification.findFirst(
-        {
-          where: {
-            recipientId: user.id.toString(),
-          },
-        },
-      );
+    expect(response.status).toBe(204);
 
-      expect(notificationOnDatabase).not.toBeNull();
+    const notificationOnDatabase = await prismaService.notification.findFirst({
+      where: {
+        recipientId: user.id.toString(),
+      },
     });
+
+    expect(notificationOnDatabase?.readAt).not.toBeNull();
   });
 });

@@ -14,13 +14,13 @@ export class Slug {
 
   static createFromText(text: string): Slug {
     const slugText = text
-      .normalize('NFKD')
+      .normalize("NFKD")
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, '-') // Replace spaces with dashes
-      .replace(/[^a-z0-9-]/g, '') // Remove any characters that are not a-z, 0-9, or dashes
-      .replace(/-+/g, '-') // Replace consecutive dashes with a single dash
-      .replace(/^-+|-+$/g, ''); // Remove leading or trailing dashes
+      .replace(/\s+/g, "-") // Replace spaces with dashes
+      .replace(/[^a-z0-9-]/g, "") // Remove any characters that are not a-z, 0-9, or dashes
+      .replace(/-+/g, "-") // Replace consecutive dashes with a single dash
+      .replace(/^-+|-+$/g, ""); // Remove leading or trailing dashes
     return new Slug(slugText);
   }
 }

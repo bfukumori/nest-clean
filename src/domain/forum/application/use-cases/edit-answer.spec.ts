@@ -15,11 +15,12 @@ let sut: EditAnswerUseCase;
 
 describe("Edit answer", () => {
   beforeEach(() => {
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository();
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository,
     );
-    inMemoryAnswerAttachmentsRepository =
-      new InMemoryAnswerAttachmentsRepository();
+
     sut = new EditAnswerUseCase(
       inMemoryAnswersRepository,
       inMemoryAnswerAttachmentsRepository,

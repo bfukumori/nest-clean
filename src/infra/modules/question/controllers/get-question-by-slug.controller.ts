@@ -1,6 +1,6 @@
 import { BadRequestException, Controller, Get, Param } from "@nestjs/common";
 
-import { QuestionPresenter } from "@/infra/http/presenters/question-presenter";
+import { QuestionDetailsPresenter } from "@/infra/http/presenters/question-details-presenter";
 
 import { GetQuestionBySlugService } from "../services/get-question-by-slug.service";
 
@@ -21,6 +21,6 @@ export class GetQuestionBySlugController {
 
     const question = result.value.question;
 
-    return { question: QuestionPresenter.toHTTPResponse(question) };
+    return { question: QuestionDetailsPresenter.toHTTPResponse(question) };
   }
 }

@@ -1,5 +1,6 @@
 import { makeAnswerComment } from "test/factories/make-answer-comment";
 import { InMemoryAnswerCommentsRepository } from "test/repositories/in-memory-answer-comments-repository";
+import { InMemoryStudentsRepository } from "test/repositories/in-memory-students-repository";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
@@ -7,12 +8,16 @@ import { NotAllowedError } from "@/core/errors/not-allowed-error";
 
 import { DeleteAnswerCommentUseCase } from "./delete-answer-comment";
 
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository;
 let sut: DeleteAnswerCommentUseCase;
 
 describe("Delete answer comment", () => {
   beforeEach(() => {
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository();
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository,
+    );
     sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentsRepository);
   });
 

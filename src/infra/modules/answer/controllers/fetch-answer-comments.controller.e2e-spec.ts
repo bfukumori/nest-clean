@@ -15,8 +15,8 @@ describe("Get answer comments (e2e)", () => {
   let app: INestApplication;
   let jwtService: JwtService;
   let studentFactory: StudentFactory;
-  let answerFactory: AnswerFactory;
   let questionFactory: QuestionFactory;
+  let answerFactory: AnswerFactory;
   let answerCommentFactory: AnswerCommentFactory;
 
   beforeAll(async () => {
@@ -24,17 +24,17 @@ describe("Get answer comments (e2e)", () => {
       imports: [AppModule, DatabaseModule],
       providers: [
         StudentFactory,
+        QuestionFactory,
         AnswerFactory,
         AnswerCommentFactory,
-        QuestionFactory,
       ],
     }).compile();
 
     app = moduleRef.createNestApplication();
     jwtService = moduleRef.get(JwtService);
     studentFactory = moduleRef.get(StudentFactory);
-    answerFactory = moduleRef.get(AnswerFactory);
     questionFactory = moduleRef.get(QuestionFactory);
+    answerFactory = moduleRef.get(AnswerFactory);
     answerCommentFactory = moduleRef.get(AnswerCommentFactory);
 
     await app.init();
@@ -45,7 +45,7 @@ describe("Get answer comments (e2e)", () => {
   });
 
   test("[GET] /answers/:answerId/comments", async () => {
-    const user = await studentFactory.makePrismaStudent();
+    const user = await studentFactory.makePrismaStudent({ name: "John Doe" });
 
     const accessToken = jwtService.sign({ sub: user.id.toString() });
 
@@ -60,19 +60,21 @@ describe("Get answer comments (e2e)", () => {
       questionId,
     });
 
-    const answerId = answer.id;
+    await Promise.all([
+      answerCommentFactory.makePrismaAnswerComment({
+        content: "Answer comment 1",
+        authorId: user.id,
+        answerId: answer.id,
+      }),
 
-    await answerCommentFactory.makePrismaAnswerComment({
-      content: "Answer comment 1",
-      authorId: user.id,
-      answerId,
-    });
+      answerCommentFactory.makePrismaAnswerComment({
+        content: "Answer comment 2",
+        authorId: user.id,
+        answerId: answer.id,
+      }),
+    ]);
 
-    await answerCommentFactory.makePrismaAnswerComment({
-      content: "Answer comment 2",
-      authorId: user.id,
-      answerId,
-    });
+    const answerId = answer.id.toString();
 
     const response = await request(app.getHttpServer())
       .get(`/answers/${answerId}/comments`)
@@ -82,9 +84,15 @@ describe("Get answer comments (e2e)", () => {
     expect(response.status).toBe(200);
 
     expect(response.body).toEqual({
-      answerComments: expect.arrayContaining([
-        expect.objectContaining({ content: "Answer comment 2" }),
-        expect.objectContaining({ content: "Answer comment 1" }),
+      comments: expect.arrayContaining([
+        expect.objectContaining({
+          content: "Answer comment 2",
+          authorName: "John Doe",
+        }),
+        expect.objectContaining({
+          content: "Answer comment 1",
+          authorName: "John Doe",
+        }),
       ]),
     });
   });
